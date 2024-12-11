@@ -9,8 +9,18 @@ app.use(express.static('public'));
 app.use(express.urlencoded({extended:true}));
 app.set('view engine', 'ejs');
 
-app.use('/', blogroute);
 
+app.use((err, req, res, next) => {
+    console.error(err.stack); // Log the error stack for debugging
+    
+    // Render an error page using EJS
+    res.status(500).render('error', {
+        message: 'Something went wrong!',
+        error: err
+    });
+});
+
+app.use('/', blogroute);
 
 const port = process.env.PORT || 4000;
 
