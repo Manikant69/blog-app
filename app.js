@@ -10,15 +10,13 @@ app.use(express.urlencoded({extended:true}));
 app.set('view engine', 'ejs');
 
 
-app.use((err, req, res, next) => {
-    console.error(err.stack); // Log the error stack for debugging
-    
-    // Render an error page using EJS
-    res.status(500).render('error', {
-        message: 'Something went wrong!',
-        error: err
-    });
-});
+app.use((req, res, next) => {
+    res.setHeader(
+      'Content-Security-Policy',
+      "default-src 'self'; font-src 'self' https://blog-app-manikant69.vercel.app; script-src 'self'; style-src 'self';"
+    );
+    next();
+  });
 
 app.use('/', blogroute);
 
