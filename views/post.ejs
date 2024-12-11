@@ -1,0 +1,14 @@
+<%- include('header'); %>
+    <div class="container">
+        <section>
+            <h1> <%= post.title %>   </h1>
+            <p class="fst-italic"><small><mark>
+                        <%= post.date_published %>
+                    </mark></small>
+            </p>
+            <p> <%= post.content %> </p>
+            <hr />
+        </section>
+
+    </div>
+    <%- include('footer') %>
